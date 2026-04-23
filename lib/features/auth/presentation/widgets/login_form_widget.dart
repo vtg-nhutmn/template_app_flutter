@@ -1,7 +1,7 @@
-import 'package:architecture/core/utils/validators.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_event.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_state.dart';
+import 'package:demo/core/utils/validators.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'primary_button.dart';

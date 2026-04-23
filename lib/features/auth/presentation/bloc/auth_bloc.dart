@@ -1,7 +1,7 @@
-import 'package:architecture/core/usecases/usecase.dart';
-import 'package:architecture/features/auth/domain/usecases/is_logged_in_usecase.dart';
-import 'package:architecture/features/auth/domain/usecases/login_usecase.dart';
-import 'package:architecture/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:demo/core/usecases/usecase.dart';
+import 'package:demo/features/auth/domain/usecases/is_logged_in_usecase.dart';
+import 'package:demo/features/auth/domain/usecases/login_usecase.dart';
+import 'package:demo/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';

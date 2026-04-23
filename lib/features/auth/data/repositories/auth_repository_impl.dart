@@ -1,10 +1,10 @@
-import 'package:architecture/core/errors/exceptions.dart';
-import 'package:architecture/core/errors/failures.dart';
-import 'package:architecture/core/network/network_info.dart';
-import 'package:architecture/features/auth/data/datasources/auth_local_data_source.dart';
-import 'package:architecture/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:architecture/features/auth/domain/entities/user_entity.dart';
-import 'package:architecture/features/auth/domain/repositories/auth_repository.dart';
+import 'package:demo/core/errors/exceptions.dart';
+import 'package:demo/core/errors/failures.dart';
+import 'package:demo/core/network/network_info.dart';
+import 'package:demo/features/auth/data/datasources/auth_local_data_source.dart';
+import 'package:demo/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:demo/features/auth/domain/entities/user_entity.dart';
+import 'package:demo/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

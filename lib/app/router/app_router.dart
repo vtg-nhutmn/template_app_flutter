@@ -1,7 +1,7 @@
-import 'package:architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_state.dart';
-import 'package:architecture/features/auth/presentation/pages/login_page.dart';
-import 'package:architecture/features/profile/presentation/pages/profile_page.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_state.dart';
+import 'package:demo/features/auth/presentation/pages/login_page.dart';
+import 'package:demo/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'app_routes.dart';

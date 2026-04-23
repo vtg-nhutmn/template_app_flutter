@@ -1,22 +1,22 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:architecture/core/network/dio_client.dart';
-import 'package:architecture/core/network/network_info.dart';
-import 'package:architecture/core/storage/secure_storage.dart';
-import 'package:architecture/features/auth/data/datasources/auth_local_data_source.dart';
-import 'package:architecture/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:architecture/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:architecture/features/auth/domain/repositories/auth_repository.dart';
-import 'package:architecture/features/auth/domain/usecases/is_logged_in_usecase.dart';
-import 'package:architecture/features/auth/domain/usecases/login_usecase.dart';
-import 'package:architecture/features/auth/domain/usecases/logout_usecase.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:architecture/features/profile/data/datasources/profile_remote_data_source.dart';
-import 'package:architecture/features/profile/data/repositories/profile_repository_impl.dart';
-import 'package:architecture/features/profile/domain/repositories/profile_repository.dart';
-import 'package:architecture/features/profile/domain/usecases/get_profile_usecase.dart';
-import 'package:architecture/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:demo/core/network/dio_client.dart';
+import 'package:demo/core/network/network_info.dart';
+import 'package:demo/core/storage/secure_storage.dart';
+import 'package:demo/features/auth/data/datasources/auth_local_data_source.dart';
+import 'package:demo/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:demo/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:demo/features/auth/domain/repositories/auth_repository.dart';
+import 'package:demo/features/auth/domain/usecases/is_logged_in_usecase.dart';
+import 'package:demo/features/auth/domain/usecases/login_usecase.dart';
+import 'package:demo/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:demo/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:demo/features/profile/domain/repositories/profile_repository.dart';
+import 'package:demo/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:demo/features/profile/presentation/bloc/profile_bloc.dart';
 
 final getIt = GetIt.instance;
 

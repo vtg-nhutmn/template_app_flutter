@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
-import 'package:architecture/core/constants/api_constants.dart';
-import 'package:architecture/core/storage/secure_storage.dart';
+import 'package:demo/core/constants/api_constants.dart';
+import 'package:demo/core/storage/secure_storage.dart';
 import 'package:dio/dio.dart';
 
 class DioClient {

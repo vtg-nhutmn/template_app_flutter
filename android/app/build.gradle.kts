@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "vn.vinhtan.app.architecture"
+    namespace = "vn.vinhtan.app.demo"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "vn.vinhtan.app.architecture"
+        applicationId = "vn.vinhtan.app.demo"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

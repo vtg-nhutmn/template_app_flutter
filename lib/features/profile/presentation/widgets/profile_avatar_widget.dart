@@ -1,4 +1,4 @@
-import 'package:architecture/app/theme/app_colors.dart';
+import 'package:demo/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProfileAvatarWidget extends StatelessWidget {

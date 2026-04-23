@@ -1,7 +1,7 @@
-import 'package:architecture/core/constants/api_constants.dart';
-import 'package:architecture/core/errors/exceptions.dart';
-import 'package:architecture/core/network/dio_client.dart';
-import 'package:architecture/features/auth/data/models/user_model.dart';
+import 'package:demo/core/constants/api_constants.dart';
+import 'package:demo/core/errors/exceptions.dart';
+import 'package:demo/core/network/dio_client.dart';
+import 'package:demo/features/auth/data/models/user_model.dart';
 import 'package:dio/dio.dart';
 
 abstract class AuthRemoteDataSource {

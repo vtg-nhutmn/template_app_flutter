@@ -1,4 +1,4 @@
-import 'package:architecture/features/auth/domain/entities/user_entity.dart';
+import 'package:demo/features/auth/domain/entities/user_entity.dart';
 
 class UserModel {
   final String accessToken;

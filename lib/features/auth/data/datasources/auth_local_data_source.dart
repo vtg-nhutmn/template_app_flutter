@@ -1,6 +1,6 @@
-import 'package:architecture/core/constants/api_constants.dart';
-import 'package:architecture/core/errors/exceptions.dart';
-import 'package:architecture/core/storage/secure_storage.dart';
+import 'package:demo/core/constants/api_constants.dart';
+import 'package:demo/core/errors/exceptions.dart';
+import 'package:demo/core/storage/secure_storage.dart';
 
 abstract class AuthLocalDataSource {
   Future<void> saveToken(String token);

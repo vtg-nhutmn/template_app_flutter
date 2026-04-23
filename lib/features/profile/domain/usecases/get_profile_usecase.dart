@@ -1,7 +1,7 @@
-import 'package:architecture/core/errors/failures.dart';
-import 'package:architecture/core/usecases/usecase.dart';
-import 'package:architecture/features/profile/domain/entities/profile_entity.dart';
-import 'package:architecture/features/profile/domain/repositories/profile_repository.dart';
+import 'package:demo/core/errors/failures.dart';
+import 'package:demo/core/usecases/usecase.dart';
+import 'package:demo/features/profile/domain/entities/profile_entity.dart';
+import 'package:demo/features/profile/domain/repositories/profile_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
 class GetProfileUseCase implements UseCase<ProfileEntity, NoParams> {

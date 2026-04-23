@@ -1,6 +1,6 @@
-import 'package:architecture/app/theme/app_colors.dart';
-import 'package:architecture/app/theme/app_text_styles.dart';
-import 'package:architecture/features/auth/presentation/widgets/login_form_widget.dart';
+import 'package:demo/app/theme/app_colors.dart';
+import 'package:demo/app/theme/app_text_styles.dart';
+import 'package:demo/features/auth/presentation/widgets/login_form_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -26,7 +26,10 @@ class LoginPage extends StatelessWidget {
                 child: const Icon(Icons.eco, size: 48, color: Colors.white),
               ),
               const SizedBox(height: 24),
-              const Text('Demo Architecture', style: AppTextStyles.heading1),
+              const Text(
+                'Demo Standard Structure',
+                style: AppTextStyles.heading1,
+              ),
               const SizedBox(height: 8),
               const Text(
                 'Đăng nhập để tiếp tục',

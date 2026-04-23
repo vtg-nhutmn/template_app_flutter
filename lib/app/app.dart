@@ -1,6 +1,6 @@
-import 'package:architecture/core/di/injection_container.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_event.dart';
+import 'package:demo/core/di/injection_container.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'router/app_router.dart';

@@ -1,5 +1,5 @@
-import 'package:architecture/core/usecases/usecase.dart';
-import 'package:architecture/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:demo/core/usecases/usecase.dart';
+import 'package:demo/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';

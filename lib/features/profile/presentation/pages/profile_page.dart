@@ -1,13 +1,13 @@
-import 'package:architecture/app/theme/app_colors.dart';
-import 'package:architecture/core/di/injection_container.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:architecture/features/auth/presentation/bloc/auth_event.dart';
-import 'package:architecture/features/profile/domain/entities/profile_entity.dart';
-import 'package:architecture/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:architecture/features/profile/presentation/bloc/profile_event.dart';
-import 'package:architecture/features/profile/presentation/bloc/profile_state.dart';
-import 'package:architecture/features/profile/presentation/widgets/profile_avatar_widget.dart';
-import 'package:architecture/features/profile/presentation/widgets/profile_info_card_widget.dart';
+import 'package:demo/app/theme/app_colors.dart';
+import 'package:demo/core/di/injection_container.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
+import 'package:demo/features/profile/domain/entities/profile_entity.dart';
+import 'package:demo/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:demo/features/profile/presentation/bloc/profile_event.dart';
+import 'package:demo/features/profile/presentation/bloc/profile_state.dart';
+import 'package:demo/features/profile/presentation/widgets/profile_avatar_widget.dart';
+import 'package:demo/features/profile/presentation/widgets/profile_info_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
