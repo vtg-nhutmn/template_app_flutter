@@ -1,3 +1,4 @@
+import 'package:demo/app/router/app_routes.dart';
 import 'package:demo/app/theme/app_colors.dart';
 import 'package:demo/core/di/injection_container.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:demo/features/profile/presentation/widgets/profile_avatar_widget
 import 'package:demo/features/profile/presentation/widgets/profile_info_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -32,6 +34,26 @@ class _ProfileView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Thông tin cá nhân'),
         actions: [
+          BlocBuilder<ProfileBloc, ProfileState>(
+            builder: (context, state) {
+              if (state is ProfileLoaded) {
+                return IconButton(
+                  icon: const Icon(Icons.edit_outlined),
+                  tooltip: 'Chỉnh sửa',
+                  onPressed: () async {
+                    final result = await context.push<bool>(
+                      AppRoutes.editProfile,
+                      extra: state.profile,
+                    );
+                    if (result == true && context.mounted) {
+                      context.read<ProfileBloc>().add(ProfileLoadRequested());
+                    }
+                  },
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Đăng xuất',
@@ -98,10 +120,10 @@ class _ProfileContent extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 16),
-          ProfileAvatarWidget(name: profile.name),
+          ProfileAvatarWidget(name: profile.displayName),
           const SizedBox(height: 16),
           Text(
-            profile.name,
+            profile.displayName,
             style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -116,7 +138,7 @@ class _ProfileContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              profile.role.name,
+              profile.isActive ? 'Đang hoạt động' : 'Ngừng hoạt động',
               style: const TextStyle(
                 fontSize: 13,
                 color: AppColors.primary,
@@ -147,7 +169,7 @@ class _ProfileContent extends StatelessWidget {
                   ),
                   ProfileInfoCardWidget(
                     label: 'Họ và tên',
-                    value: profile.name,
+                    value: profile.displayName,
                     icon: Icons.badge_outlined,
                   ),
                   ProfileInfoCardWidget(
@@ -161,16 +183,11 @@ class _ProfileContent extends StatelessWidget {
                     icon: Icons.phone_outlined,
                   ),
                   ProfileInfoCardWidget(
-                    label: 'Mã nhân viên',
-                    value: profile.code,
-                    icon: Icons.qr_code_outlined,
-                  ),
-                  ProfileInfoCardWidget(
-                    label: 'Trạng thái',
-                    value: profile.isActive
-                        ? 'Đang hoạt động'
-                        : 'Ngừng hoạt động',
-                    icon: Icons.circle_outlined,
+                    label: 'Ngày tạo',
+                    value: profile.createdAt.isNotEmpty
+                        ? profile.createdAt.substring(0, 10)
+                        : 'Không rõ',
+                    icon: Icons.calendar_today_outlined,
                   ),
                 ],
               ),
@@ -178,58 +195,14 @@ class _ProfileContent extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Quyền hạn',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${profile.role.permissions.length} quyền được cấp',
-                    style: const TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: profile.role.permissions
-                        .take(12)
-                        .map(
-                          (p) => Chip(
-                            label: Text(
-                              p,
-                              style: const TextStyle(fontSize: 11),
-                            ),
-                            backgroundColor: const Color(0x141E6B3C),
-                            side: BorderSide.none,
-                            padding: EdgeInsets.zero,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  if (profile.role.permissions.length > 12) ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      '... và ${profile.role.permissions.length - 12} quyền khác',
-                      style: const TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 13,
-                      ),
-                    ),
-                  ],
-                ],
+            child: ListTile(
+              leading: const Icon(Icons.lock_outline, color: AppColors.primary),
+              title: const Text('Đổi mật khẩu'),
+              trailing: const Icon(
+                Icons.chevron_right,
+                color: AppColors.textSecondary,
               ),
+              onTap: () => context.push(AppRoutes.changePassword),
             ),
           ),
           const SizedBox(height: 24),

@@ -1,93 +1,56 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/profile_entity.dart';
 
-class RoleModel {
-  final int id;
-  final String name;
-  final String description;
-  final List<String> permissions;
-
-  const RoleModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.permissions,
-  });
-
-  factory RoleModel.fromJson(Map<String, dynamic> json) {
-    return RoleModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      permissions: List<String>.from(json['permissions'] as List),
-    );
-  }
-
-  RoleEntity toEntity() => RoleEntity(
-    id: id,
-    name: name,
-    description: description,
-    permissions: permissions,
-  );
-}
-
 class ProfileModel {
-  final int id;
-  final String code;
-  final String name;
+  final String uid;
   final String username;
-  final int branchId;
   final String email;
+  final String displayName;
   final String? phone;
-  final int roleId;
   final bool isActive;
+  final bool role;
   final String createdAt;
-  final String updatedAt;
-  final RoleModel role;
 
   const ProfileModel({
-    required this.id,
-    required this.code,
-    required this.name,
+    required this.uid,
     required this.username,
-    required this.branchId,
     required this.email,
+    required this.displayName,
     this.phone,
-    required this.roleId,
     required this.isActive,
-    required this.createdAt,
-    required this.updatedAt,
     required this.role,
+    required this.createdAt,
   });
 
-  factory ProfileModel.fromJson(Map<String, dynamic> json) {
+  factory ProfileModel.fromFirestore(String uid, Map<String, dynamic> data) {
+    final createdAt = data['createdAt'];
+    String createdAtStr = '';
+    if (createdAt is Timestamp) {
+      createdAtStr = createdAt.toDate().toIso8601String();
+    } else if (createdAt != null) {
+      createdAtStr = createdAt.toString();
+    }
+
     return ProfileModel(
-      id: json['id'] as int,
-      code: json['code'] as String,
-      name: json['name'] as String,
-      username: json['username'] as String,
-      branchId: json['branchId'] as int,
-      email: json['email'] as String,
-      phone: json['phone'] as String?,
-      roleId: json['roleId'] as int,
-      isActive: json['isActive'] as bool,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      role: RoleModel.fromJson(json['role'] as Map<String, dynamic>),
+      uid: uid,
+      username: data['username'] as String? ?? '',
+      email: data['email'] as String? ?? '',
+      displayName: data['displayName'] as String? ?? '',
+      phone: data['phone'] as String?,
+      isActive: data['isActive'] as bool? ?? true,
+      role: data['role'] as bool? ?? false,
+      createdAt: createdAtStr,
     );
   }
 
   ProfileEntity toEntity() => ProfileEntity(
-    id: id,
-    code: code,
-    name: name,
+    uid: uid,
     username: username,
-    branchId: branchId,
     email: email,
+    displayName: displayName,
     phone: phone,
-    roleId: roleId,
     isActive: isActive,
+    role: role,
     createdAt: createdAt,
-    updatedAt: updatedAt,
-    role: role.toEntity(),
   );
 }

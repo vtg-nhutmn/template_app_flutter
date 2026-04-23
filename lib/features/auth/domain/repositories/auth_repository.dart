@@ -11,4 +11,12 @@ abstract class AuthRepository {
   Future<Either<Failure, Unit>> logout();
 
   Future<Either<Failure, bool>> isLoggedIn();
+
+  Future<Either<Failure, Unit>> register({
+    required String username,
+    required String email,
+    required String password,
+    required String displayName,
+    required String phone,
+  });
 }

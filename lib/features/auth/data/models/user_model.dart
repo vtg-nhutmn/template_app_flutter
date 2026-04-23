@@ -1,15 +1,15 @@
 import 'package:demo/features/auth/domain/entities/user_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel {
-  final String accessToken;
+  final String uid;
+  final String email;
 
-  const UserModel({required this.accessToken});
+  const UserModel({required this.uid, required this.email});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(accessToken: json['accessToken'] as String);
+  factory UserModel.fromFirebaseUser(User user) {
+    return UserModel(uid: user.uid, email: user.email ?? '');
   }
 
-  Map<String, dynamic> toJson() => {'accessToken': accessToken};
-
-  UserEntity toEntity() => UserEntity(accessToken: accessToken);
+  UserEntity toEntity() => UserEntity(uid: uid, email: email);
 }

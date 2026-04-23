@@ -1,21 +1,21 @@
 import 'package:demo/core/errors/exceptions.dart';
 import 'package:demo/core/errors/failures.dart';
 import 'package:demo/core/network/network_info.dart';
-import 'package:demo/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:demo/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:demo/features/auth/domain/entities/user_entity.dart';
 import 'package:demo/features/auth/domain/repositories/auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
-  final AuthLocalDataSource _localDataSource;
   final NetworkInfo _networkInfo;
+  final FirebaseAuth _firebaseAuth;
 
   AuthRepositoryImpl(
     this._remoteDataSource,
-    this._localDataSource,
     this._networkInfo,
+    this._firebaseAuth,
   );
 
   @override
@@ -31,32 +31,56 @@ class AuthRepositoryImpl implements AuthRepository {
         username: username,
         password: password,
       );
-      await _localDataSource.saveToken(userModel.accessToken);
       return right(userModel.toEntity());
     } on ServerException catch (e) {
       return left(ServerFailure(message: e.message, statusCode: e.statusCode));
-    } on CacheException catch (e) {
-      return left(CacheFailure(message: e.message));
     }
   }
 
   @override
   Future<Either<Failure, Unit>> logout() async {
     try {
-      await _localDataSource.deleteToken();
+      await _firebaseAuth.signOut();
       return right(unit);
-    } on CacheException catch (e) {
-      return left(CacheFailure(message: e.message));
+    } catch (e) {
+      return left(ServerFailure(message: 'Đăng xuất thất bại: $e'));
     }
   }
 
   @override
   Future<Either<Failure, bool>> isLoggedIn() async {
     try {
-      final token = await _localDataSource.getToken();
-      return right(token != null && token.isNotEmpty);
-    } on CacheException catch (e) {
-      return left(CacheFailure(message: e.message));
+      final user = _firebaseAuth.currentUser;
+      return right(user != null);
+    } catch (e) {
+      return left(
+        ServerFailure(message: 'Không thể kiểm tra trạng thái đăng nhập'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> register({
+    required String username,
+    required String email,
+    required String password,
+    required String displayName,
+    required String phone,
+  }) async {
+    if (!await _networkInfo.isConnected) {
+      return left(const NetworkFailure());
+    }
+    try {
+      await _remoteDataSource.register(
+        username: username,
+        email: email,
+        password: password,
+        displayName: displayName,
+        phone: phone,
+      );
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(ServerFailure(message: e.message, statusCode: e.statusCode));
     }
   }
 }

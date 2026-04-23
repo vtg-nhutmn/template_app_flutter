@@ -1,7 +1,9 @@
+import 'package:demo/app/router/app_routes.dart';
 import 'package:demo/app/theme/app_colors.dart';
 import 'package:demo/app/theme/app_text_styles.dart';
 import 'package:demo/features/auth/presentation/widgets/login_form_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -37,6 +39,17 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 48),
               const LoginFormWidget(),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Chưa có tài khoản?'),
+                  TextButton(
+                    onPressed: () => context.push(AppRoutes.register),
+                    child: const Text('Đăng ký'),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

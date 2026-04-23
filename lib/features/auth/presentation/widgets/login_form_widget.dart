@@ -1,4 +1,6 @@
 import 'package:demo/core/utils/validators.dart';
+import 'package:demo/core/widgets/app_password_field.dart';
+import 'package:demo/core/widgets/app_text_field.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_state.dart';
@@ -17,7 +19,6 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
 
   @override
   void dispose() {
@@ -47,39 +48,23 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextFormField(
+              AppTextField(
                 controller: _usernameController,
-                enabled: !isLoading,
-                decoration: const InputDecoration(
-                  labelText: 'Tên đăng nhập',
-                  prefixIcon: Icon(Icons.person_outline),
-                ),
+                labelText: 'Tên đăng nhập',
+                prefixIcon: const Icon(Icons.person_outline),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
+                enabled: !isLoading,
                 validator: Validators.validateUsername,
               ),
               const SizedBox(height: 16),
-              TextFormField(
+              AppPasswordField(
                 controller: _passwordController,
-                enabled: !isLoading,
-                obscureText: _obscurePassword,
-                decoration: InputDecoration(
-                  labelText: 'Mật khẩu',
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                    ),
-                    onPressed: () {
-                      setState(() => _obscurePassword = !_obscurePassword);
-                    },
-                  ),
-                ),
+                labelText: 'Mật khẩu',
                 textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) => _onSubmit(),
+                enabled: !isLoading,
                 validator: Validators.validatePassword,
+                onFieldSubmitted: (_) => _onSubmit(),
               ),
               const SizedBox(height: 28),
               PrimaryButton(

@@ -1,14 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:demo/core/constants/api_constants.dart';
-import 'package:demo/core/storage/secure_storage.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DioClient {
   late final Dio _dio;
-  final SecureStorage _secureStorage;
 
-  DioClient(this._secureStorage) {
+  DioClient() {
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,
@@ -21,7 +20,7 @@ class DioClient {
       ),
     );
     _dio.interceptors.addAll([
-      _AuthInterceptor(_secureStorage),
+      _AuthInterceptor(),
       LogInterceptor(
         requestBody: true,
         responseBody: true,
@@ -34,17 +33,14 @@ class DioClient {
 }
 
 class _AuthInterceptor extends Interceptor {
-  final SecureStorage _secureStorage;
-
-  _AuthInterceptor(this._secureStorage);
-
   @override
   Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await _secureStorage.read(ApiConstants.tokenKey);
-    if (token != null) {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final token = await user.getIdToken();
       options.headers['Authorization'] = 'Bearer $token';
     }
     handler.next(options);
