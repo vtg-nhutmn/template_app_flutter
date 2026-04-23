@@ -1,4 +1,4 @@
-package com.example.app_template_framework
+package vn.vinhtan.app.architecture
 
 import io.flutter.embedding.android.FlutterActivity
 
