@@ -1,8 +1,5 @@
 import 'package:demo/app/router/app_routes.dart';
 import 'package:demo/app/theme/app_colors.dart';
-import 'package:demo/core/di/injection_container.dart';
-import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
 import 'package:demo/features/profile/domain/entities/profile_entity.dart';
 import 'package:demo/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:demo/features/profile/presentation/bloc/profile_event.dart';
@@ -14,19 +11,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final VoidCallback onLogout;
+
+  const ProfilePage({super.key, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<ProfileBloc>()..add(ProfileLoadRequested()),
-      child: const _ProfileView(),
-    );
+    return _ProfileView(onLogout: onLogout);
   }
 }
 
 class _ProfileView extends StatelessWidget {
-  const _ProfileView();
+  final VoidCallback onLogout;
+
+  const _ProfileView({required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +55,7 @@ class _ProfileView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Đăng xuất',
-            onPressed: () {
-              context.read<AuthBloc>().add(AuthLogoutRequested());
-            },
+            onPressed: onLogout,
           ),
         ],
       ),
@@ -205,6 +201,24 @@ class _ProfileContent extends StatelessWidget {
               onTap: () => context.push(AppRoutes.changePassword),
             ),
           ),
+          // if (profile.role) ...[
+          //   const SizedBox(height: 12),
+          //   Card(
+          //     child: ListTile(
+          //       leading: const Icon(
+          //         Icons.campaign_outlined,
+          //         color: AppColors.primary,
+          //       ),
+          //       title: const Text('Gửi thông báo'),
+          //       subtitle: const Text('Gửi broadcast đến tất cả người dùng'),
+          //       trailing: const Icon(
+          //         Icons.chevron_right,
+          //         color: AppColors.textSecondary,
+          //       ),
+          //       onTap: () => context.push(AppRoutes.broadcastNotification),
+          //     ),
+          //   ),
+          // ],
           const SizedBox(height: 24),
         ],
       ),

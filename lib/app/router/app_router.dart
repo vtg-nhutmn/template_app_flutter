@@ -1,7 +1,12 @@
+import 'package:demo/app/pages/main_shell_page.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_state.dart';
 import 'package:demo/features/auth/presentation/pages/login_page.dart';
 import 'package:demo/features/auth/presentation/pages/register_page.dart';
+import 'package:demo/features/home/presentation/pages/add_product_page.dart';
+import 'package:demo/features/home/presentation/pages/home_page.dart';
+import 'package:demo/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:demo/features/profile/domain/entities/profile_entity.dart';
 import 'package:demo/features/profile/presentation/pages/change_password_page.dart';
 import 'package:demo/features/profile/presentation/pages/edit_profile_page.dart';
@@ -23,8 +28,8 @@ class AppRouter {
       final location = state.matchedLocation;
       final isPublic = _publicRoutes.contains(location);
 
-      if (authState is AuthAuthenticated && location == AppRoutes.login) {
-        return AppRoutes.profile;
+      if (authState is AuthAuthenticated && isPublic) {
+        return AppRoutes.home;
       }
 
       if (authState is! AuthAuthenticated &&
@@ -48,9 +53,9 @@ class AppRouter {
         builder: (context, state) => const RegisterPage(),
       ),
       GoRoute(
-        path: AppRoutes.profile,
-        name: 'profile',
-        builder: (context, state) => const ProfilePage(),
+        path: AppRoutes.addProduct,
+        name: 'addProduct',
+        builder: (context, state) => const AddProductPage(),
       ),
       GoRoute(
         path: AppRoutes.editProfile,
@@ -64,6 +69,41 @@ class AppRouter {
         path: AppRoutes.changePassword,
         name: 'changePassword',
         builder: (context, state) => const ChangePasswordPage(),
+      ),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            MainShellPage(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.home,
+                name: 'home',
+                builder: (context, state) => const HomePage(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.profile,
+                name: 'profile',
+                builder: (context, state) => ProfilePage(
+                  onLogout: () => authBloc.add(AuthLogoutRequested()),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.notifications,
+                name: 'notifications',
+                builder: (context, state) => const NotificationsPage(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );

@@ -1,9 +1,10 @@
 import 'package:demo/app/theme/app_colors.dart';
 import 'package:demo/core/utils/validators.dart';
 import 'package:demo/core/widgets/app_password_field.dart';
-import 'package:demo/features/profile/presentation/bloc/edit_profile_bloc.dart';
-import 'package:demo/features/profile/presentation/bloc/edit_profile_event.dart';
-import 'package:demo/features/profile/presentation/bloc/edit_profile_state.dart';
+import 'package:demo/core/widgets/primary_button.dart';
+import 'package:demo/features/profile/presentation/bloc/change_password_bloc.dart';
+import 'package:demo/features/profile/presentation/bloc/change_password_event.dart';
+import 'package:demo/features/profile/presentation/bloc/change_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -15,7 +16,7 @@ class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => GetIt.instance<EditProfileBloc>(),
+      create: (_) => GetIt.instance<ChangePasswordBloc>(),
       child: const _ChangePasswordView(),
     );
   }
@@ -26,9 +27,9 @@ class _ChangePasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<EditProfileBloc, EditProfileState>(
+    return BlocListener<ChangePasswordBloc, ChangePasswordState>(
       listener: (context, state) {
-        if (state is EditProfileSuccess) {
+        if (state is ChangePasswordSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.message),
@@ -36,7 +37,7 @@ class _ChangePasswordView extends StatelessWidget {
             ),
           );
           context.pop();
-        } else if (state is EditProfileFailure) {
+        } else if (state is ChangePasswordFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.message),
@@ -84,7 +85,7 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
 
   void _onSubmit() {
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<EditProfileBloc>().add(
+      context.read<ChangePasswordBloc>().add(
         ChangePasswordSubmitted(
           currentPassword: _currentPasswordController.text,
           newPassword: _newPasswordController.text,
@@ -98,9 +99,9 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EditProfileBloc, EditProfileState>(
+    return BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
       builder: (context, state) {
-        final isLoading = state is EditProfileLoading;
+        final isLoading = state is ChangePasswordLoading;
         return Form(
           key: _formKey,
           child: Column(
@@ -150,18 +151,10 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
                 onFieldSubmitted: (_) => _onSubmit(),
               ),
               const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: isLoading ? null : _onSubmit,
-                child: isLoading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Text('Đổi mật khẩu'),
+              PrimaryButton(
+                label: 'Đổi mật khẩu',
+                onPressed: _onSubmit,
+                isLoading: isLoading,
               ),
             ],
           ),

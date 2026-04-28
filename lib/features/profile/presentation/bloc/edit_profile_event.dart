@@ -21,16 +21,3 @@ class EditProfileSubmitted extends EditProfileEvent {
   @override
   List<Object?> get props => [displayName, phone, email];
 }
-
-class ChangePasswordSubmitted extends EditProfileEvent {
-  final String currentPassword;
-  final String newPassword;
-
-  const ChangePasswordSubmitted({
-    required this.currentPassword,
-    required this.newPassword,
-  });
-
-  @override
-  List<Object?> get props => [currentPassword, newPassword];
-}

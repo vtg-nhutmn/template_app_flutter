@@ -1,5 +1,8 @@
 // ignore_for_file: avoid_print
-
+// Reserved for future REST API integration.
+// Not registered in DI — the app currently uses Firebase/Firestore only.
+// When REST API is ready, register DioClient in injection_container.dart
+// and use it in feature data sources instead of Firestore.
 import 'package:demo/core/constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -6,7 +6,7 @@ import 'package:demo/features/auth/presentation/bloc/auth_event.dart';
 import 'package:demo/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'primary_button.dart';
+import 'package:demo/core/widgets/primary_button.dart';
 
 class LoginFormWidget extends StatefulWidget {
   const LoginFormWidget({super.key});

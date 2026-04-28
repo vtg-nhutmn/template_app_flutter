@@ -6,7 +6,7 @@ import 'package:demo/features/auth/presentation/bloc/register_event.dart';
 import 'package:demo/features/auth/presentation/bloc/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'primary_button.dart';
+import 'package:demo/core/widgets/primary_button.dart';
 
 class RegisterFormWidget extends StatefulWidget {
   const RegisterFormWidget({super.key});
@@ -87,7 +87,6 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                 validator: Validators.validateEmail,
               ),
               const SizedBox(height: 16),
-
               AppTextField(
                 controller: _phoneController,
                 labelText: 'Số điện thoại',

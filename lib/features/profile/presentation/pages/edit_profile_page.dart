@@ -1,6 +1,7 @@
 import 'package:demo/app/theme/app_colors.dart';
 import 'package:demo/core/utils/validators.dart';
 import 'package:demo/core/widgets/app_text_field.dart';
+import 'package:demo/core/widgets/primary_button.dart';
 import 'package:demo/features/profile/domain/entities/profile_entity.dart';
 import 'package:demo/features/profile/presentation/bloc/edit_profile_bloc.dart';
 import 'package:demo/features/profile/presentation/bloc/edit_profile_event.dart';
@@ -180,18 +181,10 @@ class _ProfileInfoSectionState extends State<_ProfileInfoSection> {
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: isLoading ? null : _onSubmit,
-                      child: isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                          : const Text('Lưu thông tin'),
+                    child: PrimaryButton(
+                      label: 'Lưu thông tin',
+                      onPressed: _onSubmit,
+                      isLoading: isLoading,
                     ),
                   ),
                 ],

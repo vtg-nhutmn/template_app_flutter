@@ -29,3 +29,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /lib/structure/project_structure.md
+
+# Firebase - sensitive config files
+google-services.json
+GoogleService-Info.plist
