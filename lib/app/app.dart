@@ -131,6 +131,7 @@ class _AppState extends State<App> {
           BlocListener<NotificationBloc, NotificationState>(
             listener: (context, state) {
               if (state is! NotificationsLoaded) return;
+              _userSessionCubit.updateUnreadCount(state.unreadCount);
               if (!_seenIdsLoaded) return;
               final List<NotificationEntity> newOnes = state.notifications
                   .where((n) => !_seenNotificationIds.contains(n.id))

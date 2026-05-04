@@ -31,6 +31,20 @@ class _HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Sản phẩm'),
         actions: [
+          BlocBuilder<UserSessionCubit, UserSessionState>(
+            builder: (context, sessionState) {
+              final unreadCount = sessionState.unreadNotificationCount;
+              return IconButton(
+                tooltip: 'Thông báo',
+                onPressed: () => context.go(AppRoutes.notifications),
+                icon: Badge(
+                  label: Text('$unreadCount'),
+                  isLabelVisible: unreadCount > 0,
+                  child: const Icon(Icons.notifications_outlined),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.refresh),
             tooltip: 'Làm mới',
