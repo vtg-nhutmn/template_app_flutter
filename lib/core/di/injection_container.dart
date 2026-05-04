@@ -1,3 +1,4 @@
+import 'package:demo/core/config/app_config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,7 +44,9 @@ import 'package:demo/features/profile/presentation/bloc/profile_bloc.dart';
 
 final getIt = GetIt.instance;
 
-void configureDependencies() {
+void configureDependencies(AppConfig config) {
+  getIt.registerSingleton<AppConfig>(config);
+
   // Infrastructure
   getIt.registerLazySingleton<FlutterSecureStorage>(
     () => const FlutterSecureStorage(),

@@ -1,8 +1,10 @@
+import 'package:demo/core/config/app_config.dart';
+import 'package:demo/core/di/injection_container.dart';
 
 class ApiConstants {
   ApiConstants._();
 
-  static const String baseUrl = 'https://vinhtanfoods.dev/api-app';
+  static String get baseUrl => getIt<AppConfig>().apiBaseUrl;
   static const String tokenKey = 'access_token';
 
   // Endpoints

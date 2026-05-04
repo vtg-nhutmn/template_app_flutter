@@ -1,0 +1,6 @@
+#include "Generated.xcconfig"
+#include "Debug.xcconfig"
+
+FLUTTER_TARGET=lib/main_dev.dart
+PRODUCT_BUNDLE_IDENTIFIER=vn.vinhtan.app.demo.dev
+APP_DISPLAY_NAME=Demo Dev
