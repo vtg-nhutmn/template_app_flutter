@@ -1,0 +1,22 @@
+import 'package:demo/core/errors/failures.dart';
+import 'package:demo/features/domain/auth/entities/user_entity.dart';
+import 'package:fpdart/fpdart.dart';
+
+abstract class AuthRepository {
+  Future<Either<Failure, UserEntity>> login({
+    required String username,
+    required String password,
+  });
+
+  Future<Either<Failure, Unit>> logout();
+
+  Future<Either<Failure, bool>> isLoggedIn();
+
+  Future<Either<Failure, Unit>> register({
+    required String username,
+    required String email,
+    required String password,
+    required String displayName,
+    required String phone,
+  });
+}
