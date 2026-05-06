@@ -211,24 +211,6 @@ class _ProfileContent extends StatelessWidget {
               onTap: () => context.push(AppRoutes.changePassword),
             ),
           ),
-          // if (profile.role) ...[
-          //   const SizedBox(height: 12),
-          //   Card(
-          //     child: ListTile(
-          //       leading: const Icon(
-          //         Icons.campaign_outlined,
-          //         color: AppColors.primary,
-          //       ),
-          //       title: const Text('Gửi thông báo'),
-          //       subtitle: const Text('Gửi broadcast đến tất cả người dùng'),
-          //       trailing: const Icon(
-          //         Icons.chevron_right,
-          //         color: AppColors.textSecondary,
-          //       ),
-          //       onTap: () => context.push(AppRoutes.broadcastNotification),
-          //     ),
-          //   ),
-          // ],
           const SizedBox(height: 24),
         ],
       ),
