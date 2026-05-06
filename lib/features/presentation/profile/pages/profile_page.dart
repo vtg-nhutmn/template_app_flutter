@@ -1,5 +1,6 @@
 import 'package:demo/app/router/app_routes.dart';
 import 'package:demo/app/theme/app_colors.dart';
+import 'package:demo/core/widgets/app_dialog.dart';
 import 'package:demo/features/domain/profile/entities/profile_entity.dart';
 import 'package:demo/features/presentation/profile/bloc/profile/profile_bloc.dart';
 import 'package:demo/features/presentation/profile/bloc/profile/profile_event.dart';
@@ -55,7 +56,16 @@ class _ProfileView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Đăng xuất',
-            onPressed: onLogout,
+            onPressed: () async {
+              final confirmed = await AppDialog.showConfirm(
+                context,
+                title: 'Đăng xuất',
+                message: 'Bạn có chắc muốn đăng xuất không?',
+                confirmText: 'Đăng xuất',
+                cancelText: 'Huỷ',
+              );
+              if (confirmed == true) onLogout();
+            },
           ),
         ],
       ),
